@@ -16,6 +16,7 @@ Python 3.8+
 
 Installation
 Clone the repository: git clone https://github.com/AayushMore1708/Bloglic.git
+pip install -r requirements.txt
 Navigate to the project directory: cd Bloglic
 Install dependencies: pip install -r requirements.txt
 Run migrations: py manage.py makemigrations BloglicApp
