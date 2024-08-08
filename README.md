@@ -23,3 +23,5 @@ Run migrations: py manage.py makemigrations BloglicApp
                 py manage.py migrate
 Run the development server: py manage.py runserver
 
+Screenshot :
+![image](https://github.com/user-attachments/assets/085e6aba-5fa0-4dba-9a93-5b7cd02a424f)
