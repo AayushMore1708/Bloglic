@@ -1,0 +1,48 @@
+<!-- base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/script.js' %}"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+</head>
+
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li>
+                    <h2><b>BloglicApp</b> - Blogging Simplified</h2>
+                </li>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                {% if request.user.is_authenticated %}
+                <li><a href="{% url 'post_create' %}" class="link">New Post</a> </li>
+        <li><h2 class="message">Welcome, {{ request.user.username }} to the Bloglic App!</h2></li>
+                
+                
+                {% endif %}
+                <!-- ... -->
+                {% if request.user.is_authenticated %}
+                <li class="righttop"><a href="{% url 'logout' %}">Logout</a></li>
+                {% else %}
+                <li><h3 class="message" >Welcome to the Bloglic App! Kindly Login or Signup to access your blogs</h3></li>
+                <li><div class="righttop" style="text-align: center;">
+                    <button class="button"><a class="trButtons" href="{% url 'login' %}">Login</a></button>
+                    <button class="button"><a class="trButtons" href="{% url 'register' %}">SignUp</a></button>
+                </div><li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+    <footer>
+        <p>&copy; 2024 - Developed By आयुष राजेश मोरे</p>
+    </footer>
+</body>
+
+</html>

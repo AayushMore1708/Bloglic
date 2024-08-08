@@ -1,0 +1,64 @@
+<!-- blog/post_detail.html -->
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="post-container">
+    <div class="post-header">
+        <h1>{{ post.title }}</h1>
+        <p>Author: {{ post.author }}</p>
+    </div>
+    <div class="post-content">
+        <p>{{ post.content }}</p>
+    </div>
+    <div class="likes-container">
+        <h3>Likes: {{ post.likes.count }}</h3>
+        {% if user.is_authenticated %}
+        {% if user in post.likes.all %}
+        <a href="{% url 'like_post' post.pk %}" class="fas fa-thumbs-down"> Unlike</a>
+        {% else %}
+        <a href="{% url 'like_post' post.pk %}" class="fas fa-thumbs-up"> Like</a>
+        {% endif %}
+        {% else %}
+        <p>You must be logged in to like a post.</p>
+        <a href="{% url 'login' %}">Login</a>
+        {% endif %}
+    </div>
+    <div class="comments-container">
+        <h2>Comments</h2>
+        {% for comment in comments %}
+        <div class="comment">
+            <p>By {{ comment.author.username }} on {{ comment.created_at }}:</p>
+            <p>{{ comment.content }}</p>
+        </div>
+        {% empty %}
+        <p>No comments yet.</p>
+        {% endfor %}
+    </div>
+    {% if user.is_authenticated %}
+    <div class="add-comment-container">
+        <button id="add-comment-button" class="btn btn-primary">Add comment</button>
+        <form method="post" id="add-comment-form" style="display: none;">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="add-comment-form-button">Add comment</button>
+        </form>
+    </div>
+    {% else %}
+    <p>You must be logged in to comment.</p>
+    <a href="{% url 'login' %}">Login</a>
+    {% endif %}
+    <div class="back-to-post-list">
+        <a href="{% url 'post_list' %}">Back to Post List</a>
+    </div>
+    {% if user == post.author %}
+    <p>
+        <a href="{% url 'post_update' post.pk %}">Edit Post</a>
+        |
+        <a href="{% url 'post_delete' post.pk %}">Delete Post</a>
+    </p>
+    {% endif %}
+</div>
+
+{% endblock %}

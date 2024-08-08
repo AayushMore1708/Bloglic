@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<div class="signup-block">
+    <div class="container">
+        <div>
+            <h2>SignUp To Your BlogLic Account<h2>
+        </div>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Register">
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,28 @@
+<!-- blog/post_list.html -->
+{% extends 'base.html' %}
+
+{% block title %}Blog Posts{% endblock %}
+
+{% block content %}
+
+
+<div class="containerPost">
+    <h1 class="title">Blog Posts</h1>
+
+    {% if posts %}
+    <ul class="post-list">
+        {% for post in posts %}
+        <li class="post">
+            <a href="{% url 'post_detail' post.pk %}" class="post-link">{{ post.title }}</a>
+            <span class="author">by {{ post.author }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p class="no-posts">No posts available.</p>
+    {% endif %}
+
+</div>
+
+
+{% endblock %}
